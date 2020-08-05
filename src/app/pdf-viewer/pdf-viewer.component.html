@@ -1,0 +1,43 @@
+<div class="container-fluid">
+	<div class="row sticky-top">
+		  <div class="col-2 p-3 order-first text-center bg-light">Preview</div>
+		  <div class="col-1 p-3 order-last text-center bg-light">X</div>
+		  <div class="col p-3 bg-light">
+			  <div class="row">
+		  <div class="col-1 offset-3">
+			<a [href]="pdfSrc"><i class="fa fa-print"></i></a>
+		  </div> <!-- Print -->
+		  <div class="col-1">
+			<a [href]="pdfSrc" download ><i class="fa fa-arrow-down"></i></a>
+		  </div> <!-- Download -->
+		  <!-- Scroll -->
+		  <div *ngIf="isLoaded" style="text-align: center;">
+			<div class="row">
+			  <div class="col">
+				<button (click)="prevPage()" [disabled]="page === 1" class="btn btn-outline-dark">
+				  <i class="fa fa-angle-up"></i>
+				</button>
+			  </div>
+			  <div class="col">
+				<button (click)="nextPage()" [disabled]="page === totalPages" class="btn btn-outline-dark">
+				  <i class="fa fa-angle-down"></i>
+				</button>
+			  </div>
+			</div>
+		  </div>
+		  <!-- Page Number -->
+		  <div class="col-1"><span>{{ page }} / {{ totalPages }}</span></div>
+			  </div>
+		  </div>
+	  </div>
+	  <div class="container-fluid bg-secondary" id="pdf-contain">
+	  <pdf-viewer (after-load-complete)="afterLoadComplete($event)"
+				  [page]="page"
+				  [render-text]="true"
+				  [show-all]="false"
+				  [src]="pdfSrc"
+				  id="pdf_main"
+				  style="display: block;"
+	  ></pdf-viewer>
+	</div>
+  </div>
